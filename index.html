@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Daily Feed · AI 研究日报</title>
+<meta name="description" content="机器人 / 视觉生成 / LLM Agent / 强化学习 每日论文与大厂动态">
+<meta name="theme-color" content="#f6f5f2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14161a" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📰</text></svg>">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="logo">◆</span><span>Daily Feed</span></div>
+  <div class="datenav">
+    <button id="prevDay" class="icon" title="前一天 (←)" aria-label="前一天">‹</button>
+    <select id="dateSel" aria-label="选择日期"></select>
+    <button id="nextDay" class="icon" title="后一天 (→)" aria-label="后一天">›</button>
+  </div>
+  <div class="tools">
+    <button id="starBtn" class="pill" title="收藏夹">★ <span id="starCount">0</span></button>
+    <button id="themeBtn" class="icon" title="切换深浅色" aria-label="切换深浅色">◐</button>
+    <button id="helpBtn" class="icon" title="快捷键 (?)" aria-label="快捷键">?</button>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="hero-head">
+      <div>
+        <h1 id="heroTitle">今日精选</h1>
+        <p id="heroSub" class="muted"></p>
+      </div>
+    </div>
+    <div id="picks" class="picks" aria-label="今日精选"></div>
+  </section>
+
+  <section class="filters" id="filters">
+    <div class="row chips" id="areaChips" role="tablist"></div>
+    <div class="row controls">
+      <div class="search">
+        <input id="q" type="search" placeholder="搜索标题、摘要、作者、机构…  ( / )" autocomplete="off">
+      </div>
+      <select id="sort" aria-label="排序">
+        <option value="score">推荐</option>
+        <option value="hot">HF 热度</option>
+        <option value="new">最新</option>
+      </select>
+    </div>
+    <div class="row chips toggles">
+      <button class="chip tog" data-tog="code">⌨ 有代码</button>
+      <button class="chip tog" data-tog="project">🔗 项目页</button>
+      <button class="chip tog" data-tog="hf">🤗 HF 收录</button>
+      <button class="chip tog" data-tog="unread">○ 未读</button>
+      <button class="chip ghost" id="topicsBtn">＃ 话题</button>
+    </div>
+    <div id="topics" class="topics" hidden></div>
+    <div id="activeFilters" class="active-filters"></div>
+  </section>
+
+  <section>
+    <div id="resultInfo" class="muted small result-info"></div>
+    <div id="list" class="list"></div>
+    <div id="sentinel" class="sentinel"></div>
+    <div id="empty" class="empty" hidden>没有符合条件的条目</div>
+  </section>
+</main>
+
+<footer class="foot muted small">
+  数据：arXiv · Hugging Face Daily Papers · 各公司官方博客 RSS。中文标题与要点由模型生成，以原文为准。
+  <span id="genTime"></span>
+</footer>
+
+<dialog id="help">
+  <h3>快捷键</h3>
+  <ul class="keys">
+    <li><kbd>j</kbd>/<kbd>k</kbd> 下一条 / 上一条</li>
+    <li><kbd>Enter</kbd> 展开 / 收起摘要</li>
+    <li><kbd>o</kbd> 打开原文　<kbd>p</kbd> 打开 PDF</li>
+    <li><kbd>s</kbd> 收藏 / 取消</li>
+    <li><kbd>x</kbd> 标记已读 / 未读</li>
+    <li><kbd>/</kbd> 搜索　<kbd>Esc</kbd> 清除</li>
+    <li><kbd>←</kbd>/<kbd>→</kbd> 前一天 / 后一天</li>
+    <li><kbd>1</kbd>–<kbd>7</kbd> 切换分区</li>
+  </ul>
+  <form method="dialog"><button class="pill">好的</button></form>
+</dialog>
+
+<script src="app.js"></script>
+</body>
+</html>
